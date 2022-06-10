@@ -1,4 +1,4 @@
-const { response } = require("express");
+
 
 /**
  * Класс Sidebar отвечает за работу боковой колонки:
@@ -55,7 +55,7 @@ class Sidebar {
     }
 
 
-    const logoutButton = documetn.querySelector('.menu-item_logout')
+    const logoutButton = document.querySelector('.menu-item_logout')
     logoutButton.onclick = logout
     function logout() {
       User.logout()

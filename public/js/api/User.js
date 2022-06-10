@@ -44,7 +44,7 @@ class User {
       method: 'GET', 
       callback: (err, response) => {
         callback(err, response)
-      if(response.success == 'true') {
+      if(err == null && response.success) {
         this.setCurrent(response.user)
       } else {
         this.unsetCurrent(response.user)
@@ -66,7 +66,7 @@ class User {
       responseType: 'json',
       data,
       callback: (err, response) => {
-        if (response && response.user) {
+        if (err == null && response.success && response.user) {
           this.setCurrent(response.user);
         }
         callback(err, response);
@@ -86,7 +86,7 @@ createRequest({
   method: 'POST',
   data,
   callback: (err, response) => {
-    if(response.success == 'true') {
+    if(err == null && response.success) {
       this.setCurrent(response.user)
     }
     callback(err, response)
@@ -103,7 +103,7 @@ createRequest({
   url: this.URL + '/logout',
   method: 'POST',
   callback: (err, response) => {
-    if(response.success == 'true') {
+    if(err == null && response.success) {
       this.unsetCurrent(response.user)
     }
     callback(err, response)

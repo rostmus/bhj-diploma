@@ -14,7 +14,12 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-
+    if(element == '') {
+      return error
+    }
+    this.element = element
+    this.registerEvents(this.element)
+    this.update()
   }
 
   /**
@@ -25,6 +30,16 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
+    const createAccount = document.querySelector('.create-account')
+    createAccount.onclick = () => {
+      App.getModal()
+      const lineAccount = document.getElementsByClassName('account')
+      for(let i = 0; i < lineAccount.length; i++) {
+        lineAccount[i].onclick = () => {
+          this.onSelectAccount()
+        }
+      }
+    }
 
   }
 
