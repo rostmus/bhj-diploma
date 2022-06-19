@@ -4,33 +4,61 @@
  * */
 const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest()
-    xhr.responseType = 'json'
-    let url = options.URL
-    let formData = new FormData()
+    const formData = new FormData
+    xhr.response.type = 'json'
     if (options.method === 'GET') {
-        let keys = options.data
-        for (let key in keys) {
-            url.searchParams.set(key, options.data[key])
+        if (options.data) {
+            let url = new URL(options.url, location.href)
+            let keys = Object.keys(options.data)
+            for (let key in keys) {
+                url.searchParams.set(key, options.data[key])
+            }
+
+            xhr.open('GET', url)
+            xhr.onload = function () {
+                options.callback(null, xhr.response)
+            }
         }
-        xhr.open('GET', url)
+        try {
+            xhr.send();
+        } catch (err) {
+            options.callback(err, null);
+        }
 
     } else {
-        let keys = Object.keys(options.data)
-        for (let key in keys) {
-            formData.append(key, options.data[key])
-        }
-        xhr.open('POST', url)
-    }
-    xhr.onload = function () {
-        options.callback(null, xhr.response)
-    }
 
-    xhr.onerror = function () {
-        options.callback(xhr.response.error, null);
+        if (options.data) {
+            let keys = Object.keys(options.data)
+            for (let key in keys) {
+                formData.append(key, options.data[key])
+            }
+
+            xhr.open(options.method, options.URL)
+            xhr.onload = function () {
+                options.callback(null, xhr.response)
+            }
+        }
+        try {
+            xhr.send(formData);
+        } catch (err) {
+            options.callback(err, null);
+        }
     }
-    try {
-        xhr.send(formData);
-    } catch (error) {
-        throw error;
-    }
-};
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

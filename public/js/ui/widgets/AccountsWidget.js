@@ -18,7 +18,7 @@ class AccountsWidget {
       return error
     }
     this.element = element
-    this.registerEvents(this.element)
+    this.registerEvents()
     this.update()
   }
 
@@ -30,16 +30,17 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-    const createAccount = document.querySelector('.create-account')
-    createAccount.onclick = () => {
-      App.getModal()
-      const lineAccount = document.getElementsByClassName('account')
-      for(let i = 0; i < lineAccount.length; i++) {
-        lineAccount[i].onclick = () => {
-          this.onSelectAccount()
-        }
-      }
-    }
+    this.element.addEventListener('click', (event)=> {
+      let elTarget = event.target
+      if (elTarget.classList.contains('create-account')) {
+        App.getModal('createAccount').open();
+       }
+    
+       if (event.elTarget.closest('.account')) {
+        this.onSelectAccount(elTarget.closest('.account'));
+       } 
+    })
+
 
   }
 
@@ -53,8 +54,15 @@ class AccountsWidget {
    * Отображает список полученных счетов с помощью
    * метода renderItem()
    * */
-  update() {
-
+   update() {
+    if (User.current()) {
+     Account.list(null, (error, response) => {
+      if (response.success) {
+       this.clear();
+       this.renderItem(response.data);
+      }
+     });
+    }
   }
 
   /**
@@ -63,6 +71,11 @@ class AccountsWidget {
    * в боковой колонке
    * */
   clear() {
+    let elements = Array.from(this.element.querySelectorAll('.account'));
+
+  for (let elem of elements) {
+   elem.remove();
+  }
 
   }
 
@@ -73,18 +86,30 @@ class AccountsWidget {
    * счёта класс .active.
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
-  onSelectAccount( element ) {
-
-  }
+   onSelectAccount(element) {
+    let accounts = element.closest('.accounts-panel').querySelectorAll('.account');
+  
+    accounts.forEach(elem => elem.classList.remove('active'));
+    element.classList.add('active');
+  
+    App.showPage('transactions', { account_id: element.dataset.id })
+   }
 
   /**
    * Возвращает HTML-код счёта для последующего
    * отображения в боковой колонке.
    * item - объект с данными о счёте
    * */
-  getAccountHTML(item){
-
-  }
+   getAccountHTML(item) {
+    return `
+      <li class="account" data-id="${item.id}">
+        <a href="#">
+          <span>${item.name}</span> /
+          <span>${item.sum}</span>
+        </a>
+      </li>
+      `
+   }
 
   /**
    * Получает массив с информацией о счетах.
@@ -93,6 +118,14 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-
+    if (data) {
+      for(let item of data) {
+       this.element.insertAdjacentHTML(
+        'beforeend',
+        this.getAccountHTML(item)
+       )
+      }
+   
+     }
   }
 }

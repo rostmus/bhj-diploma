@@ -5,6 +5,21 @@
       "email": "demo@demo",
       "password": "demo",
       "id": "1"
+    },
+    {
+      "id": "3y9ky6137ml4irl1f1"
+    },
+    {
+      "id": "3y9ky613ecl4it4ibn"
+    },
+    {
+      "id": "3y9ky613g6l4itdckq"
+    },
+    {
+      "id": "3y9ky614bol4ju1825"
+    },
+    {
+      "id": "3y9ky6153pl4k2ujk4"
     }
   ],
   "accounts": [
@@ -22,6 +37,14 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
+    },
+    {
+      "user_id": "3y9ky6153pl4k2ujk4",
+      "id": "3y9ky6156gl4k2x4gm"
+    },
+    {
+      "user_id": "3y9ky6153pl4k2ujk4",
+      "id": "3y9ky6156rl4k2xidp"
     }
   ],
   "transactions": [

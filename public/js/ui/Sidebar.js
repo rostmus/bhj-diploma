@@ -41,28 +41,26 @@ class Sidebar {
    * выходу устанавливает App.setState( 'init' )
    * */
   static initAuthLinks() {
-    const registerButton = document.getElementById('modal-register')
-    registerButton.onclick = register
-
-    function register() {
-      this.Modal.open(App.getModal)
-    }
-    const enterButton = document.getElementById('modal-login')
-    enterButton.onclick = enter
-
-    function enter() {
-      this.Modal.open(App.getModal)
-    }
-
-
-    const logoutButton = document.querySelector('.menu-item_logout')
-    logoutButton.onclick = logout
-    function logout() {
-      User.logout()
-      if(response.success == 'true') {
-        App.setState('init')
+    const mainSidebar = document.querySelector('.main-sidebar')
+    mainSidebar.addEventListener('click', function(event) {
+      let elTarget = event.target
+      let modal 
+      if(elTarget.closest('.menu-item_register')) {
+        modal = App.getModal('register')
+        modal.open()
+      } else if(elTarget.closest('.menu-item_login')) {
+        modal = App.getModal('login')
+        modal.open()
+      } else if(elTarget.closest('menu-item_logout')) {
+        User.logout(function(error, response) {
+          if (response.success) {
+            App.setState('init');
+          }
+        })
       }
     }
+    )
 
+    
   }
 }

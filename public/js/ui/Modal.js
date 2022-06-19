@@ -24,11 +24,15 @@ class Modal {
    * должен закрыть текущее окно
    * (с помощью метода Modal.onClose)
    * */
-  registerEvents() {
-    const elementArr = this.element.querySelectorAll('.modal')
-    for(let i = 0; i < elementArr.length; i++) {
-      elementArr[i].onclick = this.onClose
-    }
+   registerEvents() {
+    let closeButtons = this.element.querySelectorAll('[data-dismiss="modal"]');
+
+    closeButtons.forEach(elem => {
+      elem.addEventListener('click', (event) => {
+        event.preventDefault();
+          this.onClose();
+      })
+    });
   }
 
   /**
