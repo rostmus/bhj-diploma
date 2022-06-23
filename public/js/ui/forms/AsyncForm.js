@@ -46,13 +46,13 @@ class AsyncForm {
     const form = this.element
     let formObj = {}
     let formData = new FormData(form)
+    console.log(form)
+    console.log(formData)
     let entries = formData.entries()
     form.querySelectorAll('input')
     for(let item in entries) {
-      const key = item[0]
-      const value = item[1]
-      return {key: value}
-
+      formObj[item[0]] = item[1]
+      return formObj
     }
 
   }
