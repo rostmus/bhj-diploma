@@ -43,13 +43,13 @@ class User {
     createRequest({
       url: this.URL + '/current',
       method: 'GET',
-      callback: (err, response) => {
-        if (err == null && response.success) {
-          this.setCurrent(response.user)
+      callback: (error, response) => {
+        if (response.success) {
+          User.setCurrent(response.user)
         } else {
-          this.unsetCurrent()
+          User.unsetCurrent()
         }
-        callback(err, response)
+        callback(error, response)
       }
     })
 
@@ -61,17 +61,20 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
+
+  
   static login(data, callback) {
     createRequest({
       url: this.URL + '/login',
       method: 'POST',
       responseType: 'json',
       data,
-      callback: (err, response) => {
-        if (err == null && response.success) {
-          this.setCurrent(response.user);
+      callback: (error, response) => {
+        console.log(response.user)
+        if (response && response.user) {
+          User.setCurrent(response.user);
         }
-        callback(err, response);
+        callback(error, response);
       }
     });
   }
@@ -87,11 +90,11 @@ class User {
       url: this.URL + '/register',
       method: 'POST',
       data,
-      callback: (err, response) => {
-        if (err == null && response.user) {
+      callback: (error, response) => {
+        if (error == null && response.success) {
           this.setCurrent(response.user)
         }
-        callback(err, response)
+        callback(error, response)
       }
     })
   }
@@ -105,11 +108,11 @@ class User {
     createRequest({
       url: this.URL + '/logout',
       method: 'POST',
-      callback: (err, response) => {
+      callback: (error, response) => {
         if (response.success) {
           this.unsetCurrent()
         }
-        callback(err, response)
+        callback(error, response)
       }
 
     })

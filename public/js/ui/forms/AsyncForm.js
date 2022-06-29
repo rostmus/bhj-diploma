@@ -17,7 +17,7 @@ class AsyncForm {
       return error
     }
     this.element = element
-    this.registerEvents(this.element)
+    this.registerEvents()
 
 
   }
@@ -44,16 +44,13 @@ class AsyncForm {
    * */
   getData() {
     const form = this.element
-    let formObj = {}
     let formData = new FormData(form)
-    console.log(form)
-    console.log(formData)
-    let entries = formData.entries()
-    form.querySelectorAll('input')
-    for(let item in entries) {
+    let formObj = {}
+    for(let item of formData.entries()) {
       formObj[item[0]] = item[1]
-      return formObj
+      console.log(formObj)
     }
+    return formObj
 
   }
 

@@ -36,7 +36,7 @@ class AccountsWidget {
         App.getModal('createAccount').open();
        }
     
-       if (event.elTarget.closest('.account')) {
+       if (elTarget.closest('.account')) {
         this.onSelectAccount(elTarget.closest('.account'));
        } 
     })
@@ -57,7 +57,7 @@ class AccountsWidget {
    update() {
     if (User.current()) {
      Account.list(null, (err, response) => {
-      if (err == null && response.success) {
+      if (response.success) {
        this.clear();
        this.renderItem(response.data);
       }

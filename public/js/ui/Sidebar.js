@@ -51,7 +51,7 @@ class Sidebar {
       } else if(elTarget.closest('.menu-item_login')) {
         modal = App.getModal('login')
         modal.open()
-      } else if(elTarget.closest('menu-item_logout')) {
+      } else if(elTarget.closest('.menu-item_logout')) {
         User.logout(function(error, response) {
           if (response.success) {
             App.setState('init');

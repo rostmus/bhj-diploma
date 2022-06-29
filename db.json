@@ -95,6 +95,12 @@
     },
     {
       "id": "3y9ky61ayll4r3pzv3"
+    },
+    {
+      "name": "рости",
+      "email": "rostmus_mavr@mail.ru",
+      "password": "demo",
+      "id": "3y9ky61f14l4zm4n9p"
     }
   ],
   "accounts": [
@@ -120,6 +126,25 @@
     {
       "user_id": "3y9ky6153pl4k2ujk4",
       "id": "3y9ky6156rl4k2xidp"
+    },
+    {
+      "user_id": "3y9ky61ayll4r3pzv3",
+      "id": "3y9ky61dzml4zj8jao"
+    },
+    {
+      "name": "dd",
+      "user_id": "3y9ky61f14l4zm4n9p",
+      "id": "3y9ky61f1jl4zm4wds"
+    },
+    {
+      "name": "сосисочная",
+      "user_id": "3y9ky61f14l4zm4n9p",
+      "id": "3y9ky61f7ml4zoc3iq"
+    },
+    {
+      "name": "ыы",
+      "user_id": "3y9ky61f14l4zm4n9p",
+      "id": "3y9ky61f9el4zodw2p"
     }
   ],
   "transactions": [
