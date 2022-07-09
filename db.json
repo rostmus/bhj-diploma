@@ -314,6 +314,42 @@
       "account_id": "3y9ky61f7ml4zoc3iq",
       "user_id": "3y9ky61f14l4zm4n9p",
       "created_at": "2022-06-29T16:44:42.840Z"
+    },
+    {
+      "id": "3y9ky6acdl5chic3j",
+      "type": "income",
+      "name": "dd",
+      "sum": 1000,
+      "account_id": "3y9ky61f1jl4zm4wds",
+      "user_id": "3y9ky61f14l4zm4n9p",
+      "created_at": "2022-07-08T13:19:20.766Z"
+    },
+    {
+      "id": "3y9ky6acvl5chizxp",
+      "type": "income",
+      "name": "fc",
+      "sum": 1230,
+      "account_id": "3y9ky61f1jl4zm4wds",
+      "user_id": "3y9ky61f14l4zm4n9p",
+      "created_at": "2022-07-08T13:19:51.660Z"
+    },
+    {
+      "id": "3y9ky6cbnl5doeduh",
+      "type": "income",
+      "name": "какая то барыжка ",
+      "sum": 13000,
+      "account_id": "3y9ky61fgzl4zovqbi",
+      "user_id": "3y9ky61f14l4zm4n9p",
+      "created_at": "2022-07-09T09:19:59.896Z"
+    },
+    {
+      "id": "3y9ky6cepl5dp9pys",
+      "type": "income",
+      "name": "wwewe",
+      "sum": 1000,
+      "account_id": "3y9ky61f1jl4zm4wds",
+      "user_id": "3y9ky61f14l4zm4n9p",
+      "created_at": "2022-07-09T09:44:21.939Z"
     }
   ]
 }

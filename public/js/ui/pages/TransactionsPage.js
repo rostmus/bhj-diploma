@@ -22,8 +22,8 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
    update() {
-     this.render()
-    // this.render(this.lastOptions);
+    //  this.render()
+    this.render(this.lastOptions);
   }
 
   /**
@@ -33,18 +33,18 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
    registerEvents() {
-
     this.element.addEventListener('click', (e) => {
       e.preventDefault();
       let removeAccountBtn = e.target.closest('.remove-account');
       let transactionBtn = e.target.closest('.transaction__remove');
 
       if (removeAccountBtn) {
-        this.removeAccount();
+        this.removeAccount(this.element);
       }
       if (transactionBtn) {
         let id = transactionBtn.dataset.id;
         this.removeTransaction(id);
+        console.log(id)
       }
     });
   }
@@ -65,13 +65,14 @@ class TransactionsPage {
       return;
     }
     if (confirm('Вы действительно хотите удалить счёт?')) {
-      Account.remove(this.lastOptions.account_id, {}, (err, response) => {
+      console.log(this.lastOptions.account_id)
+      Account.remove(this.lastOptions.account_id, (err, response) => {
         if (response && response.success) {
           App.updateWidgets()
           App.updateForms()
         }
       });
-      this.clear();
+      this.clear('');
     } else {
       return;
     }
@@ -85,9 +86,11 @@ class TransactionsPage {
    * */
    removeTransaction( id ) {
     if (confirm('Вы действительно хотите удалить эту транзакцию?')) {
-      Transaction.remove(id, {}, (err, response) => {
-        if (response && response.success) {
-          App.update();
+      Transaction.remove(id,  (err, response) => {
+        if (response.success === true) {
+          // App.update();
+          App.updateWidgets()
+          App.updateForms()
         }
       });
     }
@@ -105,7 +108,7 @@ class TransactionsPage {
       return;
     }
     this.lastOptions = options;
-    Account.get(options.account_id, {}, (err, response) => {
+    Account.get(options.account_id, (error, response) => {
       if (response && response.success) {
         this.renderTitle(response.data.name);
       }
@@ -204,7 +207,8 @@ class TransactionsPage {
   renderTransactions(data){
     let content = document.querySelector('.content');
 
-    const itemsHTML = data.reverse().map( this.getTransactionHTML.bind( this )).join( '' );
-    content.innerHTML = `<div class="transactions-content">${itemsHTML}</div>`;
+    const itemsHTML = data.reverse().map(this.getTransactionHTML.bind( this )).join( '' );
+    content.innerHTML = itemsHTML
+    // content.innerHTML = `<div class="transactions-content">${itemsHTML}</div>`;
   }
 }
