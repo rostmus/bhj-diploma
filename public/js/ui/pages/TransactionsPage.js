@@ -39,11 +39,13 @@ class TransactionsPage {
       let transactionBtn = e.target.closest('.transaction__remove');
 
       if (removeAccountBtn) {
+        console.log('счет')
         this.removeAccount(this.element);
       }
       if (transactionBtn) {
+        console.log('транзакция')
         let id = transactionBtn.dataset.id;
-        this.removeTransaction(id);
+        this.removeTransaction({id: id});
         console.log(id)
       }
     });
@@ -65,11 +67,12 @@ class TransactionsPage {
       return;
     }
     if (confirm('Вы действительно хотите удалить счёт?')) {
-      console.log(this.lastOptions.account_id)
-      Account.remove(this.lastOptions.account_id, (err, response) => {
+      console.log( this.lastOptions.account_id)
+      Account.remove({id: this.lastOptions.account_id}, (err, response) => {
         if (response && response.success) {
-          App.updateWidgets()
-          App.updateForms()
+          App.update();
+          // App.updateWidgets()
+          // App.updateForms()
         }
       });
       this.clear('');
@@ -88,9 +91,9 @@ class TransactionsPage {
     if (confirm('Вы действительно хотите удалить эту транзакцию?')) {
       Transaction.remove(id,  (err, response) => {
         if (response.success === true) {
-          // App.update();
-          App.updateWidgets()
-          App.updateForms()
+          App.update();
+          // App.updateWidgets()
+          // App.updateForms()
         }
       });
     }
@@ -103,7 +106,7 @@ class TransactionsPage {
    * Получает список Transaction.list и полученные данные передаёт
    * в TransactionsPage.renderTransactions()
    * */
-   render( options ) {
+   render(options) {
     if (!options) {
       return;
     }
